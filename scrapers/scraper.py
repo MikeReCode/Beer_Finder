@@ -5,6 +5,7 @@ the product link) from an online store
 """
 from abc import ABC, abstractmethod
 from typing import Union
+
 from bs4 import BeautifulSoup, ResultSet, Tag
 
 

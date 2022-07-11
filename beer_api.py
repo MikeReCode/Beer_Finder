@@ -1,11 +1,11 @@
 """ This program uses multiprocessing to use all Scrapers at the same time and generate a JSON file with the results """
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
 import multiprocessing as mp
 import time
 import json
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 from scrapers.scraperaltex import AltexScraper
 from scrapers.scraperpeny import PennyScraper
