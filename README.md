@@ -18,4 +18,4 @@ All scrapes inherit from the same abstract class called "Scraper" and they all r
 
 Install requirements from `requirements.txt` and run `beer_api.py`, when the process is finished `beers.json` will be updated.
 
-Enjoy your beer! :beer: :smile:
+Enjoy your beer! :beer::smile:
