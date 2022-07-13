@@ -6,6 +6,7 @@ import json
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 from scrapers.scraperaltex import AltexScraper
 from scrapers.scraperpeny import PennyScraper
@@ -16,21 +17,37 @@ from scrapers.scrapermegaimage import MegaImageScraper
 
 
 def runaltex(queue):
-    drivere = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    drivere.implicitly_wait(10)
-    s = AltexScraper(drivere)
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument('--log-level=3')
+    chrome_options.add_argument('user-agent=Type user agent here')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), chrome_options=chrome_options)
+    driver.implicitly_wait(10)
+    s = AltexScraper(driver)
     r = s.run_scraper()
     queue.put(r)
 
 def runpenny(queue):
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument('--log-level=3')
+    chrome_options.add_argument('user-agent=Type user agent here')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), chrome_options=chrome_options)
     driver.implicitly_wait(10)
     s = PennyScraper(driver)
     r = s.run_scraper()
     queue.put(r)
 
 def runmegaimage(queue):
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument('--log-level=3')
+    chrome_options.add_argument('disable-blink-features=AutomationControlled')
+    chrome_options.add_argument('user-agent=Type user agent here')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), chrome_options=chrome_options)
     driver.implicitly_wait(10)
     s = MegaImageScraper(driver)
     r = s.run_scraper()
@@ -56,7 +73,7 @@ def runfreshful(queue):
 
 if __name__ == '__main__':
     # add to the process list all the scrapers you want to run 
-    process = [runaltex, runpenny, runfreshful, runmegaimage, runemag, runauchan]
+    process = [runaltex, runpenny, runmegaimage, runemag, runauchan, runfreshful]
     vars = {}
 
     # Starts all processes from the "process" list and creates a Queue object for every process 
