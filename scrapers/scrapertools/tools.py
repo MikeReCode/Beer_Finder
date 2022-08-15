@@ -27,10 +27,11 @@ def add_to_products(
             }
         )
     else:
-        if price_per_liter is None:
-            print("Product has no price per liter : ", product_link)
-        else:
-            print("Product has no price : ", product_link)
+        pass
+        # if price_per_liter is None:
+        #     print("Product has no price per liter : ", product_link)
+        # else:
+        #     print("Product has no price : ", product_link)
 
 
 def calculate_liters(label: str, reverse_pattern: bool = False) -> float:

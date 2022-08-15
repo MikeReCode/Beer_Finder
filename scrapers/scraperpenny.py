@@ -91,6 +91,9 @@ class PennyScraper(Scraper):
             product_link = self.get_product_link(clickable)
             self.store_product(product_name, price_per_liter, product_price, product_link)
         self.driver.quit()
+
+        nr_of_products = len(self.all_products["products"])
+        print(f"{self.store} scrapper has finished !!  --  Nr of Products: {nr_of_products}")
         return self.all_products
 
 if __name__ == '__main__':

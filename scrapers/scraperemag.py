@@ -81,6 +81,9 @@ class EmagScraper(Scraper):
 
                 except Exception as e: 
                     pass # if one of the information is not found, go to the next product
+
+        nr_of_products = len(self.all_products["products"])
+        print(f"{self.store} scrapper has finished !!  --  Nr of Products: {nr_of_products}")
         return self.all_products
 
 if __name__ == '__main__':

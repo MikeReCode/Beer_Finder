@@ -9,7 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
 from scrapers.scraperaltex import AltexScraper
-from scrapers.scraperpeny import PennyScraper
+from scrapers.scraperpenny import PennyScraper
 from scrapers.scraperemag import EmagScraper
 from scrapers.scraperauchan import AuchanScraper
 from scrapers.scraperfreshful import FreshfulScraper

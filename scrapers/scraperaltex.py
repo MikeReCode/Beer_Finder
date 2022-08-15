@@ -72,6 +72,9 @@ class AltexScraper(Scraper):
             price_per_liter = self.get_price_per_liter(product)
             product_link = "https://altex.ro" + self.get_product_link(product)
             self.store_product(product_name, price_per_liter, product_price, product_link)
+
+        nr_of_products = len(self.all_products["products"])
+        print(f"{self.store} scrapper has finished !!  --  Nr of Products: {nr_of_products}")
         return self.all_products
 
 if __name__ == '__main__':

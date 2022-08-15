@@ -82,6 +82,8 @@ class FreshfulScraper(Scraper):
                     product_name, price_per_liter, product_price, product_link
                 )
 
+        nr_of_products = len(self.all_products["products"])
+        print(f"{self.store} scrapper has finished !!  --  Nr of Products: {nr_of_products}")
         return self.all_products
 
         
