@@ -28,7 +28,7 @@ class PennyScraper(Scraper):
         self.driver.find_element(By.XPATH, '//*[@id="onetrust-reject-all-handler"]').click()
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
-                (By.XPATH, '//*[@class="ws-product-price__base-description caption"]')
+                (By.XPATH, '//*[@class="caption"]')
             )
         )
 
@@ -38,17 +38,19 @@ class PennyScraper(Scraper):
         return soup
 
     def get_product_info(self, soup):
-        soap_info = soup.find_all("div", class_="ws-product-tile__info")
-        selenium_info = self.driver.find_elements(By.XPATH, '//*[@data-test="products-item"]')
+        # product information
+        soap_info = soup.find_all(attrs={"data-teaser-group": "product"})
+        # button that redirect to product page
+        selenium_info = self.driver.find_elements(By.XPATH, '//*[@data-test="product-tile-link"]')
         info = zip(soap_info, selenium_info)
         return info
     
     def get_product_name(self, product):
-        product_name = product.find("h3", class_="ws-product-title").text.upper().strip()
+        product_name = product.find("span", class_="show-sr-and-print").text.upper().strip()
         return product_name
     
     def get_product_price(self, product):
-        product_price = product.find("div", class_="ws-product-price-amount").text
+        product_price = product.find("div", class_="ws-product-price-type__value").text
         product_price = convert_str_price_to_float(price_locator(product_price))
         return product_price
     
@@ -56,7 +58,7 @@ class PennyScraper(Scraper):
     def get_price_per_liter(self, product):
         try:
             price_per_liter = product.find(
-            "div", class_="ws-product-price__base-description"
+            "div", class_="caption"
             ).text.strip()
             price_per_liter = convert_str_price_to_float(price_locator(price_per_liter))
         except: # return None if the information was not found
@@ -86,7 +88,7 @@ class PennyScraper(Scraper):
             product_name = self.get_product_name(product)
             product_price = self.get_product_price(product)
             price_per_liter = self.get_price_per_liter(product)
-            product_link = self.get_product_link(clickable)          
+            product_link = self.get_product_link(clickable)
             self.store_product(product_name, price_per_liter, product_price, product_link)
         self.driver.quit()
         return self.all_products
